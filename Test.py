@@ -114,53 +114,218 @@ def Check(event):
                 if map[i - 2][j + 1] == '0' or map[i - 2][j + 1] == 'p' or map[i - 2][j + 1] == 'r' or map[i - 2][
                     j + 1] == 'n' or map[i - 2][j + 1] == 'b' or map[i - 2][j + 1] == 'q' or map[i - 2][j + 1] == 'k':
                     canvas.create_image(3 + STEP * (j + 1), 3 + STEP * (i - 2), anchor=NW, image=Now)  # верх право
-        # elif CHANGE == '4':
-        #     canvas.create_image(3 + STEP * j, 3 + STEP * i, anchor=NW, image=Now)
-        #     check = True
-        #     for I in range(i, len(map)):
-        #         for J in range(j, len(map[i])):
-        #             if I == J:
-        #                 if map[I][J] == '0':
-        #                     canvas.create_image(3 + STEP * (J+j), 3 + STEP * (I+i), anchor=NW, image=Now)
-        #                 elif map[I][J] == 'p' or map[I][J] == 'r' or map[I][J] == 'n' or map[I][J] == 'b' or map[I][J] == 'q' or map[I][J] == 'k':
-        #                     canvas.create_image(3 + STEP * (J+j), 3 + STEP * (I+i), anchor=NW, image=Now)
-        #                     check = False
-        #                     break
-        #                 else:
-        #                     check = False
-        #                     break
-        #         if check == False:
-        #             check = True
-        #             break
-        #     for I in range(i, len(map)):
-        #         for J in range(j, -1, -1):
-        #             if I == J:
-        #                 if map[I][J] == '0' or map[I][J] == 'p' or map[I][J] == 'r' or map[I][J] == 'n' or map[I][J] == 'b' or map[I][J] == 'q' or map[I][J] == 'k':
-        #                     canvas.create_image(3 + STEP * J, 3 + STEP * I, anchor=NW, image=Now)
-        #                 else:
-        #                     break
-        #     for I in range(i, -1, -1):
-        #         for J in range(j, len(map[i])):
-        #             if I == J:
-        #                 if map[I][J] == '0' or map[I][J] == 'p' or map[I][J] == 'r' or map[I][J] == 'n' or map[I][J] == 'b' or map[I][J] == 'q' or map[I][J] == 'k':
-        #                     canvas.create_image(3 + STEP * J, 3 + STEP * I, anchor=NW, image=Now)
-        #                 else:
-        #                     break
-        #     for I in range(i, -1, -1):
-        #         for J in range(j, -1, -1):
-        #             if I == J:
-        #                 if map[I][J] == '0' or map[I][J] == 'p' or map[I][J] == 'r' or map[I][J] == 'n' or map[I][J] == 'b' or map[I][J] == 'q' or map[I][J] == 'k':
-        #                     canvas.create_image(3 + STEP * J, 3 + STEP * I, anchor=NW, image=Now)
-        #                 else:
-        #                     break
+        elif CHANGE == '4':
+            canvas.create_image(3 + STEP * j, 3 + STEP * i, anchor=NW, image=Now)
+            check = True
+            if i != 7 or j != 7:
+                for I in range(1, len(map) - i):
+                    for J in range(1, len(map[i]) - j):
+                        if I == J:
+                            if map[i + I][j + J] == '0':
+                                canvas.create_image(3 + STEP * (J + j), 3 + STEP * (I + i), anchor=NW, image=Now)
+                            elif map[i + I][j + J] == 'p' or map[i + I][j + J] == 'r' or map[i + I][j + J] == 'n' or \
+                                    map[i + I][j + J] == 'b' or map[i + I][j + J] == 'q' or map[i + I][j + J] == 'k':
+                                canvas.create_image(3 + STEP * (J + j), 3 + STEP * (I + i), anchor=NW, image=Now)
+                                check = False
+                                break
+                            else:
+                                check = False
+                                break
+                    if check == False:
+                        check = True
+                        break
+            if i != 7 or j != 0:
+                for I in range(1, len(map) - i):
+                    for J in range(1, j + 1):
+                        if I == J:
+                            if map[i + I][j - J] == '0':
+                                canvas.create_image(3 + STEP * (j - J), 3 + STEP * (i + I), anchor=NW, image=Now)
+                            elif map[i + I][j - J] == 'p' or map[i + I][j - J] == 'r' or map[I][J] == 'n' or map[i + I][
+                                j - J] == 'b' or map[i + I][j - J] == 'q' or map[i + I][j - J] == 'k':
+                                canvas.create_image(3 + STEP * (j - J), 3 + STEP * (i + I), anchor=NW, image=Now)
+                                check = False
+                                break
+                            else:
+                                check = False
+                                break
+                    if check == False:
+                        check = True
+                        break
+            if i != 0 or j != 0:
+                for I in range(1, i + 1):
+                    for J in range(1, j + 1):
+                        if I == J:
+                            if map[i - I][j - J] == '0':
+                                canvas.create_image(3 + STEP * (j - J), 3 + STEP * (i - I), anchor=NW, image=Now)
+                            elif map[i - I][j - J] == 'p' or map[i - I][j - J] == 'r' or map[i - I][j - J] == 'n' or \
+                                    map[i - I][j - J] == 'b' or map[i - I][j - J] == 'q' or map[i - I][j - J] == 'k':
+                                canvas.create_image(3 + STEP * (j - J), 3 + STEP * (i - I), anchor=NW, image=Now)
+                                check = False
+                                break
+                            else:
+                                check = False
+                                break
+                    if check == False:
+                        check = True
+                        break
+            if i != 0 or j != 7:
+                for I in range(1, i + 1):
+                    for J in range(1, len(map) - j):
+                        if I == J:
+                            if map[i - I][j + J] == '0':
+                                canvas.create_image(3 + STEP * (j + J), 3 + STEP * (i - I), anchor=NW, image=Now)
+                            elif map[i - I][j + J] == 'p' or map[i - I][j + J] == 'r' or map[i - I][j + J] == 'n' or \
+                                    map[i - I][j + J] == 'b' or map[i - I][j + J] == 'q' or map[i - I][j + J] == 'k':
+                                canvas.create_image(3 + STEP * (j + J), 3 + STEP * (i - I), anchor=NW, image=Now)
+                                check = False
+                                break
+                            else:
+                                check = False
+                                break
+                    if check == False:
+                        check = True
+                        break
         elif CHANGE == '5':
             canvas.create_image(3 + STEP * j, 3 + STEP * i, anchor=NW, image=Now)
-            canvas.create_image(3 + STEP * j, 3 + STEP * (i + 1), anchor=NW, image=Now)
-            canvas.create_image(3 + STEP * j, 3 + STEP * (i + 2), anchor=NW, image=Now)
+            for I in range(i + 1, len(map)):
+                if map[I][j] == '0':
+                    canvas.create_image(3 + STEP * j, 3 + STEP * I, anchor=NW, image=Now)
+                elif map[I][j] == 'p' or map[I][j] == 'r' or map[I][j] == 'n' or map[I][j] == 'b' or map[I][j] == 'q' or \
+                        map[I][j] == 'k':
+                    canvas.create_image(3 + STEP * j, 3 + STEP * I, anchor=NW, image=Now)
+                    break
+                elif map[I][j] != '0':
+                    break
+            for J in range(j + 1, len(map)):
+                if map[i][J] == '0':
+                    canvas.create_image(3 + STEP * J, 3 + STEP * i, anchor=NW, image=Now)
+                elif map[i][J] == 'p' or map[i][J] == 'r' or map[i][J] == 'n' or map[i][J] == 'b' or map[i][J] == 'q' or \
+                        map[i][J] == 'k':
+                    canvas.create_image(3 + STEP * J, 3 + STEP * i, anchor=NW, image=Now)
+                    break
+                elif map[i][J] != '0':
+                    break
+            for I in range(i - 1, -1, -1):
+                if map[I][j] == '0':
+                    canvas.create_image(3 + STEP * j, 3 + STEP * I, anchor=NW, image=Now)
+                elif map[I][j] == 'p' or map[I][j] == 'r' or map[I][j] == 'n' or map[I][j] == 'b' or map[I][j] == 'q' or \
+                        map[I][j] == 'k':
+                    canvas.create_image(3 + STEP * j, 3 + STEP * I, anchor=NW, image=Now)
+                    break
+                elif map[I][j] != '0':
+                    break
+            for J in range(j - 1, -1, -1):
+                if map[i][J] == '0':
+                    canvas.create_image(3 + STEP * J, 3 + STEP * i, anchor=NW, image=Now)
+                elif map[i][J] == 'p' or map[i][J] == 'r' or map[i][J] == 'n' or map[i][J] == 'b' or map[i][J] == 'q' or \
+                        map[i][J] == 'k':
+                    canvas.create_image(3 + STEP * J, 3 + STEP * i, anchor=NW, image=Now)
+                    break
+                elif map[i][J] != '0':
+                    break
+            check = True
+            if i != 7 or j != 7:
+                for I in range(1, len(map) - i):
+                    for J in range(1, len(map[i]) - j):
+                        if I == J:
+                            if map[i + I][j + J] == '0':
+                                canvas.create_image(3 + STEP * (J + j), 3 + STEP * (I + i), anchor=NW, image=Now)
+                            elif map[i + I][j + J] == 'p' or map[i + I][j + J] == 'r' or map[i + I][j + J] == 'n' or \
+                                    map[i + I][j + J] == 'b' or map[i + I][j + J] == 'q' or map[i + I][j + J] == 'k':
+                                canvas.create_image(3 + STEP * (J + j), 3 + STEP * (I + i), anchor=NW, image=Now)
+                                check = False
+                                break
+                            else:
+                                check = False
+                                break
+                    if check == False:
+                        check = True
+                        break
+            if i != 7 or j != 0:
+                for I in range(1, len(map) - i):
+                    for J in range(1, j + 1):
+                        if I == J:
+                            if map[i + I][j - J] == '0':
+                                canvas.create_image(3 + STEP * (j - J), 3 + STEP * (i + I), anchor=NW, image=Now)
+                            elif map[i + I][j - J] == 'p' or map[i + I][j - J] == 'r' or map[I][J] == 'n' or map[i + I][
+                                j - J] == 'b' or map[i + I][j - J] == 'q' or map[i + I][j - J] == 'k':
+                                canvas.create_image(3 + STEP * (j - J), 3 + STEP * (i + I), anchor=NW, image=Now)
+                                check = False
+                                break
+                            else:
+                                check = False
+                                break
+                    if check == False:
+                        check = True
+                        break
+            if i != 0 or j != 0:
+                for I in range(1, i + 1):
+                    for J in range(1, j + 1):
+                        if I == J:
+                            if map[i - I][j - J] == '0':
+                                canvas.create_image(3 + STEP * (j - J), 3 + STEP * (i - I), anchor=NW, image=Now)
+                            elif map[i - I][j - J] == 'p' or map[i - I][j - J] == 'r' or map[i - I][j - J] == 'n' or \
+                                    map[i - I][j - J] == 'b' or map[i - I][j - J] == 'q' or map[i - I][j - J] == 'k':
+                                canvas.create_image(3 + STEP * (j - J), 3 + STEP * (i - I), anchor=NW, image=Now)
+                                check = False
+                                break
+                            else:
+                                check = False
+                                break
+                    if check == False:
+                        check = True
+                        break
+            if i != 0 or j != 7:
+                for I in range(1, i + 1):
+                    for J in range(1, len(map) - j):
+                        if I == J:
+                            if map[i - I][j + J] == '0':
+                                canvas.create_image(3 + STEP * (j + J), 3 + STEP * (i - I), anchor=NW, image=Now)
+                            elif map[i - I][j + J] == 'p' or map[i - I][j + J] == 'r' or map[i - I][j + J] == 'n' or \
+                                    map[i - I][j + J] == 'b' or map[i - I][j + J] == 'q' or map[i - I][j + J] == 'k':
+                                canvas.create_image(3 + STEP * (j + J), 3 + STEP * (i - I), anchor=NW, image=Now)
+                                check = False
+                                break
+                            else:
+                                check = False
+                                break
+                    if check == False:
+                        check = True
+                        break
         elif CHANGE == '6':
             canvas.create_image(3 + STEP * j, 3 + STEP * i, anchor=NW, image=Now)
-            canvas.create_image(3 + STEP * j, 3 + STEP * (i + 1), anchor=NW, image=Now)
-            canvas.create_image(3 + STEP * j, 3 + STEP * (i + 2), anchor=NW, image=Now)
+            if i != 7 and j != 7:
+                if map[i + 1][j + 1] == '0' or map[i + 1][j + 1] == 'p' or map[i + 1][j + 1] == 'r' or map[i + 1][
+                    j + 1] == 'n' or map[i + 1][j + 1] == 'b' or map[i + 1][j + 1] == 'q' or map[i + 1][j + 1] == 'k':
+                    canvas.create_image(3 + STEP * (j + 1), 3 + STEP * (i + 1), anchor=NW, image=Now)
+            if i != 7:
+                if map[i + 1][j] == '0' or map[i + 1][j] == 'p' or map[i + 1][j] == 'r' or map[i + 1][j] == 'n' or \
+                        map[i + 1][j] == 'b' or map[i + 1][j] == 'q' or map[i + 1][j] == 'k':
+                    canvas.create_image(3 + STEP * j, 3 + STEP * (i + 1), anchor=NW, image=Now)
+            if i != 7 and j != 0:
+                if map[i + 1][j - 1] == '0' or map[i + 1][j - 1] == 'p' or map[i + 1][j - 1] == 'r' or map[i + 1][
+                    j - 1] == 'n' or map[i + 1][j - 1] == 'b' or map[i + 1][j - 1] == 'q' or map[i + 1][j - 1] == 'k':
+                    canvas.create_image(3 + STEP * (j - 1), 3 + STEP * (i + 1), anchor=NW, image=Now)
+            if j != 0:
+                if map[i][j - 1] == '0' or map[i][j - 1] == 'p' or map[i][j - 1] == 'r' or map[i][j - 1] == 'n' or \
+                        map[i][j - 1] == 'b' or map[i][j - 1] == 'q' or map[i][j - 1] == 'k':
+                    canvas.create_image(3 + STEP * (j - 1), 3 + STEP * i, anchor=NW, image=Now)
+            if i != 0 and j != 0:
+                if map[i - 1][j - 1] == '0' or map[i - 1][j - 1] == 'p' or map[i - 1][j - 1] == 'r' or map[i - 1][
+                    j - 1] == 'n' or map[i - 1][j - 1] == 'b' or map[i - 1][j - 1] == 'q' or map[i - 1][j - 1] == 'k':
+                    canvas.create_image(3 + STEP * (j - 1), 3 + STEP * (i - 1), anchor=NW, image=Now)
+            if i != 0:
+                if map[i - 1][j] == '0' or map[i - 1][j] == 'p' or map[i - 1][j] == 'r' or map[i - 1][j] == 'n' or \
+                        map[i - 1][j] == 'b' or map[i - 1][j] == 'q' or map[i - 1][j] == 'k':
+                    canvas.create_image(3 + STEP * j, 3 + STEP * (i - 1), anchor=NW, image=Now)
+            if i != 0 and j != 7:
+                if map[i - 1][j + 1] == '0' or map[i - 1][j + 1] == 'p' or map[i - 1][j + 1] == 'r' or map[i - 1][
+                    j + 1] == 'n' or map[i - 1][j + 1] == 'b' or map[i - 1][j + 1] == 'q' or map[i - 1][j + 1] == 'k':
+                    canvas.create_image(3 + STEP * (j + 1), 3 + STEP * (i - 1), anchor=NW, image=Now)
+            if j != 7:
+                if map[i][j + 1] == '0' or map[i][j + 1] == 'p' or map[i][j + 1] == 'r' or map[i][j + 1] == 'n' or \
+                        map[i][j + 1] == 'b' or map[i][j + 1] == 'q' or map[i][j + 1] == 'k':
+                    canvas.create_image(3 + STEP * (j + 1), 3 + STEP * i, anchor=NW, image=Now)
         elif CHANGE == 'p' and i == 6:
             canvas.create_image(3 + STEP * j, 3 + STEP * i, anchor=NW, image=Now)
             if map[i - 1][j] == '0':
@@ -254,16 +419,216 @@ def Check(event):
                     canvas.create_image(3 + STEP * (j + 1), 3 + STEP * (i - 2), anchor=NW, image=Now)  # верх право
         elif CHANGE == 'b':
             canvas.create_image(3 + STEP * j, 3 + STEP * i, anchor=NW, image=Now)
-            canvas.create_image(3 + STEP * j, 3 + STEP * (i + 1), anchor=NW, image=Now)
-            canvas.create_image(3 + STEP * j, 3 + STEP * (i + 2), anchor=NW, image=Now)
+            check = True
+            if i != 7 or j != 7:
+                for I in range(1, len(map) - i):
+                    for J in range(1, len(map[i]) - j):
+                        if I == J:
+                            if map[i + I][j + J] == '0':
+                                canvas.create_image(3 + STEP * (J + j), 3 + STEP * (I + i), anchor=NW, image=Now)
+                            elif map[i + I][j + J] == '1' or map[i + I][j + J] == '2' or map[i + I][j + J] == '3' or \
+                                    map[i + I][j + J] == '4' or map[i + I][j + J] == '5' or map[i + I][j + J] == '6':
+                                canvas.create_image(3 + STEP * (J + j), 3 + STEP * (I + i), anchor=NW, image=Now)
+                                check = False
+                                break
+                            else:
+                                check = False
+                                break
+                    if check == False:
+                        check = True
+                        break
+            if i != 7 or j != 0:
+                for I in range(1, len(map) - i):
+                    for J in range(1, j + 1):
+                        if I == J:
+                            if map[i + I][j - J] == '0':
+                                canvas.create_image(3 + STEP * (j - J), 3 + STEP * (i + I), anchor=NW, image=Now)
+                            elif map[i + I][j - J] == '1' or map[i + I][j - J] == '2' or map[I][J] == '3' or map[i + I][
+                                j - J] == '4' or map[i + I][j - J] == '5' or map[i + I][j - J] == '6':
+                                canvas.create_image(3 + STEP * (j - J), 3 + STEP * (i + I), anchor=NW, image=Now)
+                                check = False
+                                break
+                            else:
+                                check = False
+                                break
+                    if check == False:
+                        check = True
+                        break
+            if i != 0 or j != 0:
+                for I in range(1, i + 1):
+                    for J in range(1, j + 1):
+                        if I == J:
+                            if map[i - I][j - J] == '0':
+                                canvas.create_image(3 + STEP * (j - J), 3 + STEP * (i - I), anchor=NW, image=Now)
+                            elif map[i - I][j - J] == '1' or map[i - I][j - J] == '2' or map[i - I][j - J] == '3' or \
+                                    map[i - I][j - J] == '4' or map[i - I][j - J] == '5' or map[i - I][j - J] == '6':
+                                canvas.create_image(3 + STEP * (j - J), 3 + STEP * (i - I), anchor=NW, image=Now)
+                                check = False
+                                break
+                            else:
+                                check = False
+                                break
+                    if check == False:
+                        check = True
+                        break
+            if i != 0 or j != 7:
+                for I in range(1, i + 1):
+                    for J in range(1, len(map) - j):
+                        if I == J:
+                            if map[i - I][j + J] == '0':
+                                canvas.create_image(3 + STEP * (j + J), 3 + STEP * (i - I), anchor=NW, image=Now)
+                            elif map[i - I][j + J] == '1' or map[i - I][j + J] == '2' or map[i - I][j + J] == '3' or \
+                                    map[i - I][j + J] == '4' or map[i - I][j + J] == '5' or map[i - I][j + J] == '6':
+                                canvas.create_image(3 + STEP * (j + J), 3 + STEP * (i - I), anchor=NW, image=Now)
+                                check = False
+                                break
+                            else:
+                                check = False
+                                break
+                    if check == False:
+                        check = True
+                        break
         elif CHANGE == 'q':
             canvas.create_image(3 + STEP * j, 3 + STEP * i, anchor=NW, image=Now)
-            canvas.create_image(3 + STEP * j, 3 + STEP * (i + 1), anchor=NW, image=Now)
-            canvas.create_image(3 + STEP * j, 3 + STEP * (i + 2), anchor=NW, image=Now)
+            for I in range(i + 1, len(map)):
+                if map[I][j] == '0':
+                    canvas.create_image(3 + STEP * j, 3 + STEP * I, anchor=NW, image=Now)
+                elif map[I][j] == '1' or map[I][j] == '2' or map[I][j] == '3' or map[I][j] == '4' or map[I][j] == '5' or \
+                        map[I][j] == '6':
+                    canvas.create_image(3 + STEP * j, 3 + STEP * I, anchor=NW, image=Now)
+                    break
+                elif map[I][j] != '0':
+                    break
+            for J in range(j + 1, len(map)):
+                if map[i][J] == '0':
+                    canvas.create_image(3 + STEP * J, 3 + STEP * i, anchor=NW, image=Now)
+                elif map[i][J] == '1' or map[i][J] == '2' or map[i][J] == '3' or map[i][J] == '4' or map[i][J] == '5' or \
+                        map[i][J] == '6':
+                    canvas.create_image(3 + STEP * J, 3 + STEP * i, anchor=NW, image=Now)
+                    break
+                elif map[i][J] != '0':
+                    break
+            for I in range(i - 1, -1, -1):
+                if map[I][j] == '0':
+                    canvas.create_image(3 + STEP * j, 3 + STEP * I, anchor=NW, image=Now)
+                elif map[I][j] == '1' or map[I][j] == '2' or map[I][j] == '3' or map[I][j] == '4' or map[I][j] == '5' or \
+                        map[I][j] == '6':
+                    canvas.create_image(3 + STEP * j, 3 + STEP * I, anchor=NW, image=Now)
+                    break
+                elif map[I][j] != '0':
+                    break
+            for J in range(j - 1, -1, -1):
+                if map[i][J] == '0':
+                    canvas.create_image(3 + STEP * J, 3 + STEP * i, anchor=NW, image=Now)
+                elif map[i][J] == '1' or map[i][J] == '2' or map[i][J] == '3' or map[i][J] == '4' or map[i][J] == '5' or \
+                        map[i][J] == '6':
+                    canvas.create_image(3 + STEP * J, 3 + STEP * i, anchor=NW, image=Now)
+                    break
+                elif map[i][J] != '0':
+                    break
+            check = True
+            if i != 7 or j != 7:
+                for I in range(1, len(map) - i):
+                    for J in range(1, len(map[i]) - j):
+                        if I == J:
+                            if map[i + I][j + J] == '0':
+                                canvas.create_image(3 + STEP * (J + j), 3 + STEP * (I + i), anchor=NW, image=Now)
+                            elif map[i + I][j + J] == '1' or map[i + I][j + J] == '2' or map[i + I][j + J] == '3' or \
+                                    map[i + I][j + J] == '4' or map[i + I][j + J] == '5' or map[i + I][j + J] == '6':
+                                canvas.create_image(3 + STEP * (J + j), 3 + STEP * (I + i), anchor=NW, image=Now)
+                                check = False
+                                break
+                            else:
+                                check = False
+                                break
+                    if check == False:
+                        check = True
+                        break
+            if i != 7 or j != 0:
+                for I in range(1, len(map) - i):
+                    for J in range(1, j + 1):
+                        if I == J:
+                            if map[i + I][j - J] == '0':
+                                canvas.create_image(3 + STEP * (j - J), 3 + STEP * (i + I), anchor=NW, image=Now)
+                            elif map[i + I][j - J] == '1' or map[i + I][j - J] == '2' or map[I][J] == '3' or map[i + I][
+                                j - J] == '4' or map[i + I][j - J] == '5' or map[i + I][j - J] == '6':
+                                canvas.create_image(3 + STEP * (j - J), 3 + STEP * (i + I), anchor=NW, image=Now)
+                                check = False
+                                break
+                            else:
+                                check = False
+                                break
+                    if check == False:
+                        check = True
+                        break
+            if i != 0 or j != 0:
+                for I in range(1, i + 1):
+                    for J in range(1, j + 1):
+                        if I == J:
+                            if map[i - I][j - J] == '0':
+                                canvas.create_image(3 + STEP * (j - J), 3 + STEP * (i - I), anchor=NW, image=Now)
+                            elif map[i - I][j - J] == '1' or map[i - I][j - J] == '2' or map[i - I][j - J] == '3' or \
+                                    map[i - I][j - J] == '4' or map[i - I][j - J] == '5' or map[i - I][j - J] == '6':
+                                canvas.create_image(3 + STEP * (j - J), 3 + STEP * (i - I), anchor=NW, image=Now)
+                                check = False
+                                break
+                            else:
+                                check = False
+                                break
+                    if check == False:
+                        check = True
+                        break
+            if i != 0 or j != 7:
+                for I in range(1, i + 1):
+                    for J in range(1, len(map) - j):
+                        if I == J:
+                            if map[i - I][j + J] == '0':
+                                canvas.create_image(3 + STEP * (j + J), 3 + STEP * (i - I), anchor=NW, image=Now)
+                            elif map[i - I][j + J] == '1' or map[i - I][j + J] == '2' or map[i - I][j + J] == '3' or \
+                                    map[i - I][j + J] == '4' or map[i - I][j + J] == '5' or map[i - I][j + J] == '6':
+                                canvas.create_image(3 + STEP * (j + J), 3 + STEP * (i - I), anchor=NW, image=Now)
+                                check = False
+                                break
+                            else:
+                                check = False
+                                break
+                    if check == False:
+                        check = True
+                        break
         elif CHANGE == 'k':
             canvas.create_image(3 + STEP * j, 3 + STEP * i, anchor=NW, image=Now)
-            canvas.create_image(3 + STEP * j, 3 + STEP * (i + 1), anchor=NW, image=Now)
-            canvas.create_image(3 + STEP * j, 3 + STEP * (i + 2), anchor=NW, image=Now)
+            if i != 7 and j != 7:
+                if map[i + 1][j + 1] == '0' or map[i + 1][j + 1] == '1' or map[i + 1][j + 1] == '2' or map[i + 1][
+                    j + 1] == '3' or map[i + 1][j + 1] == '4' or map[i + 1][j + 1] == '5' or map[i + 1][j + 1] == '6':
+                    canvas.create_image(3 + STEP * (j + 1), 3 + STEP * (i + 1), anchor=NW, image=Now)
+            if i != 7:
+                if map[i + 1][j] == '0' or map[i + 1][j] == '1' or map[i + 1][j] == '2' or map[i + 1][j] == '3' or \
+                        map[i + 1][j] == '4' or map[i + 1][j] == '5' or map[i + 1][j] == '6':
+                    canvas.create_image(3 + STEP * j, 3 + STEP * (i + 1), anchor=NW, image=Now)
+            if i != 7 and j != 0:
+                if map[i + 1][j - 1] == '0' or map[i + 1][j - 1] == '1' or map[i + 1][j - 1] == '2' or map[i + 1][
+                    j - 1] == '3' or map[i + 1][j - 1] == '4' or map[i + 1][j - 1] == '5' or map[i + 1][j - 1] == '6':
+                    canvas.create_image(3 + STEP * (j - 1), 3 + STEP * (i + 1), anchor=NW, image=Now)
+            if j != 0:
+                if map[i][j - 1] == '0' or map[i][j - 1] == '1' or map[i][j - 1] == '2' or map[i][j - 1] == '3' or \
+                        map[i][j - 1] == '4' or map[i][j - 1] == '5' or map[i][j - 1] == '6':
+                    canvas.create_image(3 + STEP * (j - 1), 3 + STEP * i, anchor=NW, image=Now)
+            if i != 0 and j != 0:
+                if map[i - 1][j - 1] == '0' or map[i - 1][j - 1] == '1' or map[i - 1][j - 1] == '2' or map[i - 1][
+                    j - 1] == '3' or map[i - 1][j - 1] == '4' or map[i - 1][j - 1] == '5' or map[i - 1][j - 1] == '6':
+                    canvas.create_image(3 + STEP * (j - 1), 3 + STEP * (i - 1), anchor=NW, image=Now)
+            if i != 0:
+                if map[i - 1][j] == '0' or map[i - 1][j] == '1' or map[i - 1][j] == '2' or map[i - 1][j] == '3' or \
+                        map[i - 1][j] == '4' or map[i - 1][j] == '5' or map[i - 1][j] == '6':
+                    canvas.create_image(3 + STEP * j, 3 + STEP * (i - 1), anchor=NW, image=Now)
+            if i != 0 and j != 7:
+                if map[i - 1][j + 1] == '0' or map[i - 1][j + 1] == '1' or map[i - 1][j + 1] == '2' or map[i - 1][
+                    j + 1] == '3' or map[i - 1][j + 1] == '4' or map[i - 1][j + 1] == '5' or map[i - 1][j + 1] == '6':
+                    canvas.create_image(3 + STEP * (j + 1), 3 + STEP * (i - 1), anchor=NW, image=Now)
+            if j != 7:
+                if map[i][j + 1] == '0' or map[i][j + 1] == '1' or map[i][j + 1] == '2' or map[i][j + 1] == '3' or \
+                        map[i][j + 1] == '4' or map[i][j + 1] == '5' or map[i][j + 1] == '6':
+                    canvas.create_image(3 + STEP * (j + 1), 3 + STEP * i, anchor=NW, image=Now)
         elif CHANGE == '0':
             FLAG = True
         menu.update()
